@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Vez - Cursos</title>
+    <link rel="stylesheet" href="Cursos.css">
+</head>
+<body>
+
+    <header class="header">
+        <a href="Index.html" class="logo" aria-label="Minha Vez">
+            <span>minha</span>
+            <span class="logo-simbolo"></span>
+            <span>vez</span>
+        </a>
+
+        <nav class="menu">
+            <a href="Index.html">Início</a>
+        </nav>
+    </header>
+
+    <main class="layout">
+
+        <aside class="sidebar-filtros">
+            <h2>Filtrar cursos</h2>
+
+            <div class="bloco-filtro">
+                <h3>Inscrição:</h3>
+                <label class="opcao-filtro">
+                    <input type="radio" name="inscricao" value="aberta">
+                    <span class="radio-custom"></span> Aberta
+                </label>
+                <label class="opcao-filtro">
+                    <input type="radio" name="inscricao" value="fechada">
+                    <span class="radio-custom"></span> Fechada
+                </label>
+            </div>
+
+            <div class="bloco-filtro">
+                <h3>Curso:</h3>
+                <label class="opcao-filtro">
+                    <input type="radio" name="status_curso" value="finalizado">
+                    <span class="radio-custom"></span> Finalizado
+                </label>
+                <label class="opcao-filtro">
+                    <input type="radio" name="status_curso" value="acontecendo">
+                    <span class="radio-custom"></span> Acontecendo
+                </label>
+                <label class="opcao-filtro">
+                    <input type="radio" name="status_curso" value="para-comecar">
+                    <span class="radio-custom"></span> Para começar
+                </label>
+            </div>
+
+            <div class="bloco-filtro">
+                <h3>Área:</h3>
+                <label class="opcao-filtro cor-rosa">
+                    <input type="radio" name="area" value="estetica">
+                    <span class="radio-custom"></span> Estética
+                </label>
+                <label class="opcao-filtro cor-verde">
+                    <input type="radio" name="area" value="gastronomia">
+                    <span class="radio-custom"></span> Gastronomia
+                </label>
+                <label class="opcao-filtro cor-azul">
+                    <input type="radio" name="area" value="tecnologia">
+                    <span class="radio-custom"></span> Tecnologia
+                </label>
+                <label class="opcao-filtro cor-vermelha">
+                    <input type="radio" name="area" value="saude">
+                    <span class="radio-custom"></span> Saúde
+                </label>
+                <label class="opcao-filtro cor-amarela">
+                    <input type="radio" name="area" value="outro">
+                    <span class="radio-custom"></span> Outro
+                </label>
+            </div>
+
+            <div class="bloco-filtro">
+                <p class="texto-suave">alguma outra opção que não pensei</p>
+            </div>
+        </aside>
+
+        <section class="conteudo-cursos">
+
+            <div class="tabela-cabecalho">
+                <div class="col-curso">CURSO</div>
+                <div class="col-informacoes">IFROMAÇÕES</div>
+                <div class="col-estado">ESTADO</div>
+            </div>
+
+            <div class="lista-cursos">
+
+                <article class="card-curso borda-azul">
+                    <div class="pilula-cor bg-azul"></div>
+                    <div class="info-principal">
+                        <h2>curso de solda</h2>
+                        <span class="txt-link txt-azul">Inscrição &rarr; 01/01</span>
+                        <div class="horarios">
+                            <span>13:00 - 17:00</span>
+                            <span>00/00 - 00/00</span>
+                        </div>
+                    </div>
+                    <div class="info-detalhes">
+                        <p><strong>Local:</strong> Centro de Terinamento Proficional</p>
+                        <p><strong>vagas :</strong> 20</p>
+                        <p><strong>Inscrição :</strong> <span class="destaque-vermelho">NO SENAI</span></p>
+                    </div>
+                    <div class="info-status">
+                        <span class="rotulo-status">Status:</span>
+                        <strong class="valor-status">ABERTO</strong>
+                    </div>
+                </article>
+
+                <article class="card-curso borda-rosa">
+                    <div class="pilula-cor bg-rosa"></div>
+                    <div class="info-principal">
+                        <h2>Básico de maquiagem</h2>
+                        <span class="txt-link txt-rosa">Inscrição &rarr; 01/01</span>
+                        <div class="horarios">
+                            <span>13:00 - 17:00</span>
+                            <span>00/00 - 00/00</span>
+                        </div>
+                    </div>
+                    <div class="info-detalhes">
+                        <p><strong>Local:</strong> Centro de Terinamento Proficional</p>
+                        <p><strong>vagas :</strong> 20</p>
+                        <p><strong>Inscrição :</strong> <span class="destaque-azul">ONLINE</span></p>
+                    </div>
+                    <div class="info-status">
+                        <span class="rotulo-status">Status:</span>
+                        <strong class="valor-status">ACONTECENDO</strong>
+                    </div>
+                </article>
+
+                <article class="card-curso borda-azul">
+                    <div class="pilula-cor bg-azul"></div>
+                    <div class="info-principal">
+                        <h2>Informatica</h2>
+                        <span class="txt-link txt-azul">Inscrição &rarr; 01/01</span>
+                        <div class="horarios">
+                            <span>13:00 - 17:00</span>
+                            <span>00/00 - 00/00</span>
+                        </div>
+                    </div>
+                    <div class="info-detalhes">
+                        <p><strong>Local:</strong> IF</p>
+                        <p><strong>vagas :</strong> 20</p>
+                        <p><strong>Inscrição :</strong> <span class="destaque-verde">PLANILHA</span></p>
+                    </div>
+                    <div class="info-status">
+                        <span class="rotulo-status">Status:</span>
+                        <strong class="valor-status">ACONTECENDO</strong>
+                    </div>
+                </article>
+
+                <article class="card-curso borda-verde">
+                    <div class="pilula-cor bg-verde"></div>
+                    <div class="info-principal">
+                        <h2>BomBons e trufas</h2>
+                        <span class="txt-link txt-rosa">Inscrição &rarr; 01/01</span>
+                        <div class="horarios">
+                            <span>13:00 - 17:00</span>
+                            <span>00/00 - 00/00</span>
+                        </div>
+                    </div>
+                    <div class="info-detalhes">
+                        <p><strong>Local:</strong> Centro de Terinamento Proficional</p>
+                        <p><strong>vagas :</strong> 20</p>
+                        <p><strong>Inscrição :</strong> <span class="destaque-amarelo">SENAC</span></p>
+                    </div>
+                    <div class="info-status">
+                        <span class="rotulo-status">Status:</span>
+                        <strong class="valor-status">VAI ABRIR</strong>
+                    </div>
+                </article>
+
+                <article class="card-curso borda-vermelha">
+                    <div class="pilula-cor bg-vermelha"></div>
+                    <div class="info-principal">
+                        <h2>Primeiro Socoros</h2>
+                        <span class="txt-link txt-azul">Inscrição &rarr; 01/01</span>
+                        <div class="horarios">
+                            <span>13:00 - 17:00</span>
+                            <span>00/00 - 00/00</span>
+                        </div>
+                    </div>
+                    <div class="info-detalhes">
+                        <p><strong>Local:</strong> Centro de Terinamento Proficional</p>
+                        <p><strong>vagas :</strong> 20</p>
+                        <p><strong>Inscrição :</strong> <span class="destaque-amarelo">SENAC</span></p>
+                    </div>
+                    <div class="info-status">
+                        <span class="rotulo-status">Status:</span>
+                        <strong class="valor-status">VAI ABRIR</strong>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
