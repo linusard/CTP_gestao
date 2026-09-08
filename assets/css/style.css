@@ -10,16 +10,270 @@ body {
 
 .principal {
   display: flex;
-  gap: 15px; /* Cria um espaço opcional entre as duas divs */
+  width: 100%;
 }
 
-/* Você define o tamanho que quiser para cada uma */
+.header { /* ou a classe/tag que você usa no header */
+    position: fixed; /* ou 'sticky' / 'relative', dependendo do seu layout */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001; /* Valor maior que o z-index: 1000 da leftbar */
+    background-color: #ffffff; /* Garante que o fundo não seja transparente */
+}
+
 .leftbar {
-  width: 24%;
-  background-color: #ffcccc;
+    width: 260px;
+    /* Ajuste o top para considerar a altura do seu header + o respiro desejado */
+    top: 80px; /* Exemplo: se o header tem 60px de altura + 20px de espaçamento */
+    height: calc(100vh - 96px); /* Recalcula a altura proporcionalmente */
+    position: fixed;
+    left: 16px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 24px 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    z-index: 1000; 
 }
 
-.calendario {
-  width: 75%;
-  background-color: #ccffcc;
+.main {
+  margin-left: 300px; 
+  width: calc(100% - 300px);
+  padding: 16px;
+}
+
+.navbar-nav {
+    margin-left: 9%; 
+    gap: 10px; 
+
+
+}
+
+/* =========================================================
+   Lista de Cursos (listaCursos.php)
+   ========================================================= */
+
+.container-cursos {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.cursos-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.busca-input {
+    max-width: 280px;
+}
+
+.cursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.carregando,
+.sem-resultado {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #777;
+    padding: 40px 0;
+}
+
+.curso-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-left: 6px solid #ccc;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.curso-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.09);
+}
+
+.curso-card.azul    { border-left-color: #4C8BF5; }
+.curso-card.rosa    { border-left-color: #F56CA4; }
+.curso-card.verde   { border-left-color: #3CB878; }
+.curso-card.amarelo { border-left-color: #F5B942; }
+.curso-card.roxo    { border-left-color: #9B6CF5; }
+
+.curso-card-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.curso-area {
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.curso-status {
+    padding: 3px 10px;
+    border-radius: 999px;
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-1 { background-color: #9AA0A6; } /* Planejado */
+.status-2 { background-color: #3CB878; } /* Inscrições abertas */
+.status-3 { background-color: #4C8BF5; } /* Em andamento */
+.status-4 { background-color: #555555; } /* Concluído */
+.status-5 { background-color: #E5484D; } /* Cancelado */
+
+.curso-card h3 {
+    margin: 4px 0;
+    font-size: 18px;
+}
+
+.curso-info-linha {
+    margin: 0;
+    font-size: 14px;
+    color: #444;
+}
+
+.curso-card-link {
+    margin-top: 12px;
+    align-self: flex-start;
+    padding: 8px 16px;
+    background-color: #222;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.curso-card-link:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+/* =========================================================
+   Leftbar de filtro (templates/leftbarFiltro.php)
+   ========================================================= */
+
+.filtro-sidebar {
+    overflow-y: auto;
+}
+
+.filtro-grupo {
+    margin-bottom: 20px;
+}
+
+.filtro-grupo h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.filtro-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+
+.btn-limpar-filtro {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f1f1f1;
+    color: #333;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-limpar-filtro:hover {
+    background-color: #e2e2e2;
+}
+
+/* =========================================================
+   Página de detalhes do curso (cursoinfo.php)
+   ========================================================= */
+
+.curso-detalhe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 10px 24px;
+    margin-bottom: 24px;
+}
+
+.curso-detalhe-grid p {
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.curso-detalhe-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.btn-curso-link {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #222;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-curso-link.secundario {
+    background-color: #f1f1f1;
+    color: #222;
+}
+
+.voltar-lista {
+    display: inline-block;
+    margin-top: 4px;
+    color: #4C8BF5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Responsivo: empilha leftbar e conteúdo em telas menores */
+@media (max-width: 900px) {
+    .principal {
+        flex-direction: column;
+    }
+
+    .leftbar {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 16px;
+    }
+
+    .main {
+        margin-left: 0;
+        width: auto;
+    }
 }
