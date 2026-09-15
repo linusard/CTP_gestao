@@ -1,13 +1,13 @@
 <?php
-// Database connection details
+// Conexão principal do sistema: usada pelo calendário e por toda a gestão de cursos/turmas
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "event_calendar";
+$dbname = "gestao_cursos";
 
 try {
     // Create a new PDO instance and set the error mode to exception
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
     // Handle connection failure

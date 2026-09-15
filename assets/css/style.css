@@ -277,3 +277,56 @@ body {
         width: auto;
     }
 }
+
+/* =========================================================
+   Modal de Adicionar/Editar Curso (calendário)
+   ========================================================= */
+
+.form-secao {
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.form-secao legend {
+    width: auto;
+    padding: 0 8px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #555;
+}
+
+.form-row-dupla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+@media (max-width: 600px) {
+    .form-row-dupla {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-check-linha {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.dias-semana-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+}
+
+.form-acoes {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}

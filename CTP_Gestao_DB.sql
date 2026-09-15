@@ -92,3 +92,70 @@ CREATE TABLE IF NOT EXISTS turma_dias_semana (
     FOREIGN KEY (turma_id) REFERENCES turmas(id) ON DELETE CASCADE,
     FOREIGN KEY (dia_semana_id) REFERENCES dias_semana(id) ON DELETE CASCADE
 );
+
+INSERT INTO areas (nome) VALUES 
+    ('SAUDE'), 
+    ('ESTETICA'), 
+    ('GASTRONOMIA'), 
+    ('TECNOLOGIA'), 
+    ('OUTRO');
+
+INSERT INTO turnos (descricao) VALUES 
+    ('MANHA'), 
+    ('TARDE'), 
+    ('NOITE');
+
+INSERT INTO status_turma (descricao) VALUES 
+    ('PLANEJADO'), 
+    ('INSCRICOES ABERTAS'), 
+    ('EM ANDAMENTO'), 
+    ('CONCLUIDO'), 
+    ('CANCELADO');
+
+INSERT INTO origens (nome) VALUES 
+    ('Senac'), 
+    ('Senac+'), 
+    ('Psg'), 
+    ('Prefeitura'), 
+    ('Senar'), 
+    ('Senai'), 
+    ('Outro');
+
+INSERT INTO dias_semana (nome) VALUES 
+    ('Domingo'),
+    ('Segunda-feira'), 
+    ('Terça-feira'), 
+    ('Quarta-feira'), 
+    ('Quinta-feira'), 
+    ('Sexta-feira'), 
+    ('Sábado');
+
+INSERT INTO locais (nome) VALUES 
+    ('CTP'), 
+    ('Parque de exposição(Senar)'), 
+    ('Instituto Federal'), 
+    ('Outro');
+
+INSERT INTO cursos (nome, area_id, carga_horaria, idade_minima, escolaridade_minima, requer_cpf, requer_comprovante_residencia, requer_comprovante_escolaridade) VALUES 
+    ('Curso de Cuidador de idosos', 1, 200, 18, 'Ensino Médio Completo', TRUE, TRUE, TRUE),
+    ('Curso de Maquiagem Básica', 2, 150, 16, 'Ensino Fundamental Completo', TRUE, FALSE, FALSE),
+    ('Curso de Bombons e trufas', 3, 300, 18, 'Ensino Médio Completo', TRUE, TRUE, FALSE),
+    ('Curso de Implementação de loja virtual', 4, 250, 16, 'Ensino Médio Incompleto', TRUE, FALSE, FALSE),
+    ('Curso de Patchwork', 5, 100, 16, 'Não pedido', FALSE, FALSE, FALSE);
+
+INSERT INTO turmas (curso_id, numero_turma, origem_id, data_inicio, data_termino, turno_id, data_limite_inscricao, local_inscricao_id, vagas_estimadas, link_sistema_inscricao, link_planilha_matricula, local_aula_id, status_id) VALUES 
+    (1, 'TURMA 01', 1, '2024-07-01', '2024-12-31', 1, '2024-06-15', 1, 30, 'https://sistema-inscricao.com/cuidador-de-idosos', 'https://planilha-matricula.com/cuidador-de-idosos', 1, 2),
+    (2, 'TURMA 02', 2, '2024-08-01', '2024-11-30', 2, '2024-07-15', 2, 25, 'https://sistema-inscricao.com/maquiagem-basica', 'https://planilha-matricula.com/maquiagem-basica', 2, 2),
+    (3, 'TURMA 03', 3, '2024-09-01', '2025-02-28', 3, '2024-08-15', 3, 20, 'https://sistema-inscricao.com/bombons-e-trufas', 'https://planilha-matricula.com/bombons-e-trufas', 3, 2),
+    (4, 'TURMA 04', 4, '2024-10-01', '2025-03-31', 1, '2024-09-15', 4, 15, 'https://sistema-inscricao.com/loja-virtual', 'https://planilha-matricula.com/loja-virtual', 4, 2),
+    (5, 'TURMA 05', 5, '2024-11-01', '2025-04-30', 2, '2024-10-15', NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO turma_dias_semana (turma_id, dia_semana_id) VALUES 
+    (1, 2), -- Segunda-feira
+    (1, 4), -- Quarta-feira
+    (2, 3), -- Terça-feira
+    (2, 5), -- Quinta-feira
+    (3, 6), -- Sexta-feira
+    (4, 2), -- Segunda-feira
+    (4, 4), -- Quarta-feira
+    (5, 3); -- Terça-feira
