@@ -92,11 +92,14 @@
 
             <div class="lista-cursos">
 
-                <article class="card-curso borda-azul">
+                <article class="card-curso" data-categoria="tecnologia" data-inicio="2026-10-16" data-fim="2026-12-16">
                     <div class="pilula-cor bg-azul"></div>
                     <div class="info-principal">
                         <h2>curso de solda</h2>
-                        <span class="txt-link txt-azul">Inscrição &rarr; 01/01</span>
+                        <div class="acoes-card">
+                            <span class="txt-link txt-azul">Inscrição &rarr; 01/01</span>
+                            <button type="button" class="btn-mudar-status" title="Alterar status manualmente">Mudar Status</button>
+                        </div>
                         <div class="horarios">
                             <span>13:00 - 17:00</span>
                             <span>00/00 - 00/00</span>
@@ -109,15 +112,18 @@
                     </div>
                     <div class="info-status">
                         <span class="rotulo-status">Status:</span>
-                        <strong class="valor-status">ABERTO</strong>
+                        <strong class="valor-status">Planejado</strong>
                     </div>
                 </article>
 
-                <article class="card-curso borda-rosa">
+                <article class="card-curso" data-categoria="estetica" data-inicio="2026-10-01" data-fim="2026-10-11">
                     <div class="pilula-cor bg-rosa"></div>
                     <div class="info-principal">
                         <h2>Básico de maquiagem</h2>
-                        <span class="txt-link txt-rosa">Inscrição &rarr; 01/01</span>
+                        <div class="acoes-card">
+                            <span class="txt-link txt-rosa">Inscrição &rarr; 01/01</span>
+                            <button type="button" class="btn-mudar-status" title="Alterar status manualmente">Mudar Status</button>
+                        </div>
                         <div class="horarios">
                             <span>13:00 - 17:00</span>
                             <span>00/00 - 00/00</span>
@@ -130,15 +136,18 @@
                     </div>
                     <div class="info-status">
                         <span class="rotulo-status">Status:</span>
-                        <strong class="valor-status">ACONTECENDO</strong>
+                        <strong class="valor-status">Inscrições abertas</strong>
                     </div>
                 </article>
 
-                <article class="card-curso borda-azul">
+                <article class="card-curso" data-categoria="tecnologia" data-inicio="2026-10-01" data-fim="2026-11-01">
                     <div class="pilula-cor bg-azul"></div>
                     <div class="info-principal">
                         <h2>Informatica</h2>
-                        <span class="txt-link txt-azul">Inscrição &rarr; 01/01</span>
+                        <div class="acoes-card">
+                            <span class="txt-link txt-azul">Inscrição &rarr; 01/01</span>
+                            <button type="button" class="btn-mudar-status" title="Alterar status manualmente">Mudar Status</button>
+                        </div>
                         <div class="horarios">
                             <span>13:00 - 17:00</span>
                             <span>00/00 - 00/00</span>
@@ -151,15 +160,18 @@
                     </div>
                     <div class="info-status">
                         <span class="rotulo-status">Status:</span>
-                        <strong class="valor-status">ACONTECENDO</strong>
+                        <strong class="valor-status">Em andamento</strong>
                     </div>
                 </article>
 
-                <article class="card-curso borda-verde">
+                <article class="card-curso" data-categoria="gastronomia" data-inicio="2026-10-20" data-fim="2026-11-20">
                     <div class="pilula-cor bg-verde"></div>
                     <div class="info-principal">
                         <h2>BomBons e trufas</h2>
-                        <span class="txt-link txt-rosa">Inscrição &rarr; 01/01</span>
+                        <div class="acoes-card">
+                            <span class="txt-link txt-rosa">Inscrição &rarr; 01/01</span>
+                            <button type="button" class="btn-mudar-status" title="Alterar status manualmente">Mudar Status</button>
+                        </div>
                         <div class="horarios">
                             <span>13:00 - 17:00</span>
                             <span>00/00 - 00/00</span>
@@ -172,15 +184,18 @@
                     </div>
                     <div class="info-status">
                         <span class="rotulo-status">Status:</span>
-                        <strong class="valor-status">VAI ABRIR</strong>
+                        <strong class="valor-status">Planejado</strong>
                     </div>
                 </article>
 
-                <article class="card-curso borda-vermelha">
-                    <div class="pilula-cor bg-vermelha"></div>
+                <article class="card-curso" data-categoria="saude" data-inicio="2026-10-15" data-fim="2026-11-15">
+                    <div class="pilula-cor bg-vermelho"></div>
                     <div class="info-principal">
                         <h2>Primeiro Socoros</h2>
-                        <span class="txt-link txt-azul">Inscrição &rarr; 01/01</span>
+                        <div class="acoes-card">
+                            <span class="txt-link txt-azul">Inscrição &rarr; 01/01</span>
+                            <button type="button" class="btn-mudar-status" title="Alterar status manualmente">Mudar Status</button>
+                        </div>
                         <div class="horarios">
                             <span>13:00 - 17:00</span>
                             <span>00/00 - 00/00</span>
@@ -193,7 +208,7 @@
                     </div>
                     <div class="info-status">
                         <span class="rotulo-status">Status:</span>
-                        <strong class="valor-status">VAI ABRIR</strong>
+                        <strong class="valor-status">Planejado</strong>
                     </div>
                 </article>
 
@@ -202,5 +217,44 @@
 
     </main>
 
+    <!-- Modal de Adicionar Curso -->
+    <div id="modal-adicionar" class="modal-overlay" style="display: none;">
+        <div class="modal-conteudo">
+            <h2>Adicionar Novo Curso</h2>
+            <form id="form-adicionar-curso">
+                <div class="campo-form">
+                    <label>Nome do Curso <span class="obrigatorio">*</span></label>
+                    <input type="text" required placeholder="Ex: Informática Básica">
+                </div>
+                <div class="campo-form">
+                    <label>Categoria/Área <span class="obrigatorio">*</span></label>
+                    <select required>
+                        <option value="estetica">Estética</option>
+                        <option value="gastronomia">Gastronomia</option>
+                        <option value="saude">Saúde</option>
+                        <option value="tecnologia">Tecnologia</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                <div class="campo-form">
+                    <label>Data de Início <span class="obrigatorio">*</span></label>
+                    <input type="date" required>
+                </div>
+                <div class="campo-form">
+                    <label>Data Final <span class="obrigatorio">*</span></label>
+                    <input type="date" required>
+                </div>
+                <div class="botoes-modal">
+                    <button type="button" id="fechar-modal" class="btn-secundario">Cancelar</button>
+                    <button type="submit" class="btn-primario">Salvar Curso</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Container de Notificações Pop-ups -->
+    <div id="container-notificacoes" class="container-notificacoes"></div>
+
+    <script src="Cursos.js"></script>
 </body>
 </html>
