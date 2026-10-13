@@ -1,5 +1,4 @@
 <?php
-// Conexão padrão do sistema (gestao_cursos)
 require 'db.php';
 
 function passarDadosCurso(array $curso, string $campo) {
@@ -255,14 +254,6 @@ function fetchCursoPorTurmaId($conn, $turmaId) {
     return $turma;
 }
 
-/* =========================================================
- *  Calendário (fetch_events.php)
- * ========================================================= */
-
-/**
- * Busca as turmas cadastradas e monta o formato de evento
- * esperado pelo FullCalendar (id, title, start, end, cor).
- */
 function fetchTurmasParaCalendario($conn) {
     $sql = "SELECT
                 t.id AS id,
@@ -278,13 +269,12 @@ function fetchTurmasParaCalendario($conn) {
     $stmt = $conn->query($sql);
     $turmas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Mesmas cores usadas nos badges de status dos cards (assets/css/style.css)
     $coresStatus = [
-        1 => '#9AA0A6', // Planejado
-        2 => '#3CB878', // Inscrições abertas
-        3 => '#4C8BF5', // Em andamento
-        4 => '#555555', // Concluído
-        5 => '#E5484D', // Cancelado
+        1 => '#9AA0A6',
+        2 => '#3CB878',
+        3 => '#4C8BF5',
+        4 => '#555555',
+        5 => '#E5484D',
     ];
 
     $eventos = [];
@@ -294,8 +284,6 @@ function fetchTurmasParaCalendario($conn) {
             $titulo .= ' - ' . $turma['numero_turma'];
         }
 
-        // O FullCalendar trata o "end" de eventos de dia inteiro como exclusivo,
-        // por isso somamos 1 dia à data de término (inclusiva no banco).
         $termino = new DateTime($turma['data_termino']);
         $termino->modify('+1 day');
 
@@ -315,18 +303,6 @@ function fetchTurmasParaCalendario($conn) {
     return $eventos;
 }
 
-/* =========================================================
- *  Criação / edição / exclusão de curso + turma
- *  (add_event.php, edit_event.php, delete_event.php, get_turma.php)
- * ========================================================= */
-
-/**
- * Cria um novo curso e sua turma associada em uma única operação
- * (é assim que o modal "Adicionar Curso" do calendário funciona:
- * cada turma nova é criada junto com seu próprio curso).
- *
- * Retorna o id da turma criada.
- */
 function inserirCursoTurma($conn, array $dadosCurso, array $dadosTurma, array $diasSemanaIds) {
     $conn->beginTransaction();
 
@@ -381,10 +357,6 @@ function inserirCursoTurma($conn, array $dadosCurso, array $dadosTurma, array $d
     }
 }
 
-/**
- * Atualiza o curso e a turma associados a uma turma existente
- * (usado quando o formulário completo do modal é salvo).
- */
 function atualizarCursoTurma($conn, $turmaId, array $dadosCurso, array $dadosTurma, array $diasSemanaIds) {
     $stmt = $conn->prepare("SELECT curso_id FROM turmas WHERE id = ?");
     $stmt->execute([$turmaId]);
@@ -447,9 +419,6 @@ function atualizarCursoTurma($conn, $turmaId, array $dadosCurso, array $dadosTur
     }
 }
 
-/**
- * Substitui os dias da semana de uma turma pelos ids informados.
- */
 function salvarDiasSemanaDaTurma($conn, $turmaId, array $diasSemanaIds) {
     $stmt = $conn->prepare("DELETE FROM turma_dias_semana WHERE turma_id = ?");
     $stmt->execute([$turmaId]);
@@ -465,10 +434,6 @@ function salvarDiasSemanaDaTurma($conn, $turmaId, array $diasSemanaIds) {
     }
 }
 
-/**
- * Atualização rápida usada ao arrastar/soltar um evento no calendário:
- * altera apenas as datas de início e término da turma.
- */
 function atualizarDatasTurma($conn, $turmaId, $dataInicio, $dataTermino) {
     $stmt = $conn->prepare("SELECT id FROM turmas WHERE id = ?");
     $stmt->execute([$turmaId]);
@@ -480,11 +445,6 @@ function atualizarDatasTurma($conn, $turmaId, $dataInicio, $dataTermino) {
     $stmt->execute([$dataInicio, $dataTermino, $turmaId]);
 }
 
-/**
- * Exclui uma turma. Se o curso associado não tiver mais nenhuma
- * outra turma, o curso também é removido (cada turma criada pelo
- * modal "Adicionar Curso" tem seu próprio curso dedicado).
- */
 function excluirTurma($conn, $turmaId) {
     $stmt = $conn->prepare("SELECT curso_id FROM turmas WHERE id = ?");
     $stmt->execute([$turmaId]);
@@ -509,10 +469,6 @@ function excluirTurma($conn, $turmaId) {
     }
 }
 
-/**
- * Busca todos os dados (curso + turma + dias da semana selecionados)
- * necessários para popular o formulário de edição do modal.
- */
 function fetchTurmaFormData($conn, $turmaId) {
     $sql = "SELECT
                 t.id AS turma_id,

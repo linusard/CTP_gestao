@@ -3,7 +3,6 @@ include 'templates/header.php';
 include 'templates/navbar.php';
 include 'includes/functions.php';
 
-// Conexão com o banco de gestão de cursos e dados para popular o filtro
 $conexaoCursos = getConexaoCursos();
 $areas         = fetchAreas($conexaoCursos);
 $turnos        = fetchTurnos($conexaoCursos);

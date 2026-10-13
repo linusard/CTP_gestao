@@ -1,5 +1,4 @@
 <?php
-// Exclui uma turma (e o curso associado, se ele não tiver mais nenhuma turma)
 header('Content-Type: application/json; charset=utf-8');
 require 'includes/functions.php';
 

@@ -1,5 +1,4 @@
 <?php
-// Cria um novo curso junto com sua turma (usado pelo botão "Adicionar Curso" do calendário)
 header('Content-Type: application/json; charset=utf-8');
 require 'includes/functions.php';
 

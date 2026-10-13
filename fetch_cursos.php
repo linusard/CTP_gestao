@@ -1,6 +1,4 @@
 <?php
-// Endpoint AJAX: retorna a lista de turmas/cursos em JSON,
-// já aplicando os filtros recebidos por GET.
 header('Content-Type: application/json; charset=utf-8');
 
 require 'includes/functions.php';

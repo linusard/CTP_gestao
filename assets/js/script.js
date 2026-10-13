@@ -5,7 +5,6 @@ $(document).ready(function () {
     const saveBtn = $('#btnSalvarEvento');
     const deleteBtn = $('#deleteEvent');
 
-    // Restaura o formulário para o estado inicial (novo curso)
     function limparFormulario() {
         form[0].reset();
         $('#turmaId').val('');
@@ -15,7 +14,6 @@ $(document).ready(function () {
         $('input[name="dias_semana[]"]').prop('checked', false);
     }
 
-    // Abre o modal já pronto para cadastrar um curso novo
     function abrirModalNovo(dataInicio, dataTermino) {
         limparFormulario();
         modalTitle.text('Adicionar Curso');
@@ -94,19 +92,16 @@ $(document).ready(function () {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
-        events: 'fetch_events.php', // URL para buscar as turmas cadastradas
+        events: 'fetch_events.php',
         selectable: true,
         selectHelper: true,
         select: function (start, end) {
-            // Ao selecionar um período vazio no calendário, abre o modal
-            // já com as datas de início/término preenchidas
             const dataInicio = moment(start).format('YYYY-MM-DD');
             const dataTermino = moment(end).subtract(1, 'days').format('YYYY-MM-DD');
             abrirModalNovo(dataInicio, dataTermino);
         },
         editable: true,
         eventDrop: function (event) {
-            // Arrastar um curso no calendário atualiza apenas as datas da turma
             const dataInicio = moment(event.start).format('YYYY-MM-DD');
             const dataTermino = event.end
                 ? moment(event.end).subtract(1, 'days').format('YYYY-MM-DD')
@@ -137,7 +132,6 @@ $(document).ready(function () {
             });
         },
         eventClick: function (event) {
-            // Ao clicar em um curso já existente, carrega os dados completos para edição
             abrirModalEdicao(event.id);
         }
     });
@@ -149,7 +143,6 @@ $(document).ready(function () {
         const url = turmaId ? 'edit_event.php' : 'add_event.php';
 
         const formData = new FormData(form[0]);
-        // Checkboxes desmarcados não são enviados por padrão; forçamos 0/1 explicitamente
         formData.set('requer_cpf', $('#requerCpf').is(':checked') ? 1 : 0);
         formData.set('requer_comprovante_residencia', $('#requerComprovanteResidencia').is(':checked') ? 1 : 0);
         formData.set('requer_comprovante_escolaridade', $('#requerComprovanteEscolaridade').is(':checked') ? 1 : 0);
@@ -176,7 +169,6 @@ $(document).ready(function () {
         });
     });
 
-    // Exclusão da turma (e do curso, se ele ficar sem nenhuma turma)
     deleteBtn.on('click', function () {
         const turmaId = $('#turmaId').val();
 

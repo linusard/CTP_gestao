@@ -1,7 +1,4 @@
 <?php
-// Atualiza uma turma existente. Suporta dois modos:
-// - Atualização rápida (arrastar/soltar no calendário): apenas as datas.
-// - Atualização completa (formulário do modal): curso, turma e dias da semana.
 header('Content-Type: application/json; charset=utf-8');
 require 'includes/functions.php';
 

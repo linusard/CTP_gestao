@@ -1,5 +1,4 @@
 <?php
-// usados para preencher o formulário de edição no modal do calendário.
 header('Content-Type: application/json; charset=utf-8');
 require 'includes/functions.php';
 
