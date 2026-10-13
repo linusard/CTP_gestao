@@ -6,7 +6,7 @@
 
         <!-- Modal para adicionar/editar Curso + Turma -->
         <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-curso" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="eventModalLabel">Adicionar Curso</h5>
@@ -22,13 +22,13 @@
                             <legend>Dados do Curso</legend>
 
                             <div class="form-group">
-                                <label for="cursoNome">Nome do Curso</label>
+                                <label for="cursoNome" class="form-label-required">Nome do Curso</label>
                                 <input type="text" class="form-control" id="cursoNome" name="nome" required>
                             </div>
 
                             <div class="form-row-dupla">
                                 <div class="form-group">
-                                    <label for="areaId">Área</label>
+                                    <label for="areaId" class="form-label-required">Área</label>
                                     <select class="form-control" id="areaId" name="area_id" required>
                                         <option value="">Selecione...</option>
                                         <?php foreach ($areas as $area): ?>
@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="cargaHoraria">Carga Horária (h)</label>
+                                    <label for="cargaHoraria" class="form-label-required">Carga Horária (h)</label>
                                     <input type="number" min="1" class="form-control" id="cargaHoraria" name="carga_horaria" required>
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="origemId">Origem</label>
+                                    <label for="origemId" class="form-label-required">Origem</label>
                                     <select class="form-control" id="origemId" name="origem_id" required>
                                         <option value="">Selecione...</option>
                                         <?php foreach ($origens as $origem): ?>
@@ -90,19 +90,19 @@
 
                             <div class="form-row-dupla">
                                 <div class="form-group">
-                                    <label for="dataInicio">Data de Início</label>
+                                    <label for="dataInicio" class="form-label-required">Data de Início</label>
                                     <input type="date" class="form-control" id="dataInicio" name="data_inicio" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="dataTermino">Data de Término</label>
+                                    <label for="dataTermino" class="form-label-required">Data de Término</label>
                                     <input type="date" class="form-control" id="dataTermino" name="data_termino" required>
                                 </div>
                             </div>
 
                             <div class="form-row-dupla">
                                 <div class="form-group">
-                                    <label for="turnoId">Turno</label>
+                                    <label for="turnoId" class="form-label-required">Turno</label>
                                     <select class="form-control" id="turnoId" name="turno_id" required>
                                         <option value="">Selecione...</option>
                                         <?php foreach ($turnos as $turno): ?>

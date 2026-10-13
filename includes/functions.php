@@ -107,6 +107,8 @@ function fetchDiasSemanaPorTurma($conn, $turmaId) {
  *   'busca'      => string para buscar no nome do curso
  */
 function fetchCursos($conn, array $filtros = []) {
+    atualizarStatusCursosAutomatico($conn);
+
     $sql = "SELECT
                 t.id AS turma_id,
                 c.id AS curso_id,
@@ -170,11 +172,82 @@ function fetchCursos($conn, array $filtros = []) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function proximoStatusCursoId(int $statusAtualId): ?int {
+    $transicoes = [
+        1 => 3,
+        2 => 3,
+        3 => 4,
+        4 => 5,
+    ];
+
+    return $transicoes[$statusAtualId] ?? null;
+}
+
+function calcularStatusCursoAutomatico(string $dataReferencia, string $dataInicio, string $dataTermino): int {
+    if ($dataReferencia >= $dataInicio && $dataReferencia <= $dataTermino) {
+        return 3;
+    }
+
+    if ($dataReferencia > $dataTermino) {
+        return 4;
+    }
+
+    return 1;
+}
+
+function atualizarStatusCursosAutomatico(PDO $conn, ?string $dataReferencia = null): int {
+    $dataReferencia = $dataReferencia ?? date('Y-m-d');
+
+    $sql = "SELECT id, data_inicio, data_termino, status_id FROM turmas WHERE status_id <> 5";
+    $stmt = $conn->query($sql);
+    $turmas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $atualizados = 0;
+
+    foreach ($turmas as $turma) {
+        $novoStatus = calcularStatusCursoAutomatico(
+            $dataReferencia,
+            $turma['data_inicio'],
+            $turma['data_termino']
+        );
+
+        if ((int) $turma['status_id'] !== $novoStatus) {
+            $update = $conn->prepare("UPDATE turmas SET status_id = ? WHERE id = ?");
+            $update->execute([$novoStatus, $turma['id']]);
+            $atualizados++;
+        }
+    }
+
+    return $atualizados;
+}
+
+function avancarStatusCurso(PDO $conn, int $turmaId): ?int {
+    $stmt = $conn->prepare("SELECT status_id FROM turmas WHERE id = ?");
+    $stmt->execute([$turmaId]);
+    $statusAtual = $stmt->fetchColumn();
+
+    if ($statusAtual === false) {
+        return null;
+    }
+
+    $novoStatus = proximoStatusCursoId((int) $statusAtual);
+    if ($novoStatus === null) {
+        return null;
+    }
+
+    $update = $conn->prepare("UPDATE turmas SET status_id = ? WHERE id = ?");
+    $update->execute([$novoStatus, $turmaId]);
+
+    return $novoStatus;
+}
+
 /**
  * Busca todas as informações de uma turma/curso específico
  * (usado na página cursoinfo.php).
  */
 function fetchCursoPorTurmaId($conn, $turmaId) {
+    atualizarStatusCursosAutomatico($conn);
+
     $sql = "SELECT
                 t.id AS turma_id,
                 c.id AS curso_id,
