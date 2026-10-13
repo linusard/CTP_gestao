@@ -32,7 +32,6 @@ $(document).ready(function () {
         modal.modal('show');
     }
 
-    // Preenche todos os campos do formulário com os dados de uma turma existente
     function preencherFormulario(dados) {
         $('#turmaId').val(dados.turma_id);
 
@@ -64,7 +63,6 @@ $(document).ready(function () {
         });
     }
 
-    // Busca os dados completos da turma clicada e abre o modal em modo de edição
     function abrirModalEdicao(turmaId) {
         $.ajax({
             url: 'get_turma.php',
@@ -90,7 +88,6 @@ $(document).ready(function () {
         });
     }
 
-    // Initialize the FullCalendar
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
@@ -145,7 +142,6 @@ $(document).ready(function () {
         }
     });
 
-    // Envio do formulário: cria um curso novo ou atualiza um existente
     form.on('submit', function (e) {
         e.preventDefault();
 

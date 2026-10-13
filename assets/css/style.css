@@ -29,20 +29,19 @@ body {
   width: 100%;
 }
 
-.header { /* ou a classe/tag que você usa no header */
-    position: fixed; /* ou 'sticky' / 'relative', dependendo do seu layout */
+.header {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1001; /* Valor maior que o z-index: 1000 da leftbar */
-    background-color: #ffffff; /* Garante que o fundo não seja transparente */
+    z-index: 1001;
+    background-color: #ffffff;
 }
 
 .leftbar {
     width: 260px;
-    /* Ajuste o top para considerar a altura do seu header + o respiro desejado */
-    top: 80px; /* Exemplo: se o header tem 60px de altura + 20px de espaçamento */
-    height: calc(100vh - 96px); /* Recalcula a altura proporcionalmente */
+    top: 80px;
+    height: calc(100vh - 96px);
     position: fixed;
     left: 16px;
     background-color: #ffffff;
@@ -69,9 +68,6 @@ body {
 
 }
 
-/* =========================================================
-   Lista de Cursos (listaCursos.php)
-   ========================================================= */
 
 .container-cursos {
     max-width: 1100px;
@@ -150,11 +146,11 @@ body {
     white-space: nowrap;
 }
 
-.status-1 { background-color: #9AA0A6; } /* Planejado */
-.status-2 { background-color: #3CB878; } /* Inscrições abertas */
-.status-3 { background-color: #4C8BF5; } /* Em andamento */
-.status-4 { background-color: #555555; } /* Concluído */
-.status-5 { background-color: #E5484D; } /* Cancelado */
+.status-1 { background-color: #9AA0A6; }
+.status-2 { background-color: #3CB878; }
+.status-3 { background-color: #4C8BF5; }
+.status-4 { background-color: #555555; }
+.status-5 { background-color: #E5484D; }
 
 .curso-card h3 {
     margin: 4px 0;
@@ -268,9 +264,6 @@ body {
     }
 }
 
-/* =========================================================
-   Leftbar de filtro (templates/leftbarFiltro.php)
-   ========================================================= */
 
 .filtro-sidebar {
     overflow-y: auto;
@@ -313,9 +306,6 @@ body {
     background-color: #e2e2e2;
 }
 
-/* =========================================================
-   Página de detalhes do curso (cursoinfo.php)
-   ========================================================= */
 
 .curso-detalhe-grid {
     display: grid;
@@ -359,7 +349,6 @@ body {
     font-weight: 600;
 }
 
-/* Responsivo: empilha leftbar e conteúdo em telas menores */
 @media (max-width: 900px) {
     .principal {
         flex-direction: column;
@@ -378,9 +367,6 @@ body {
     }
 }
 
-/* =========================================================
-   Modal de Adicionar/Editar Curso (calendário)
-   ========================================================= */
 
 .form-secao {
     border: 1px solid #eee;

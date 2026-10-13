@@ -2,9 +2,6 @@
 // Conexão padrão do sistema (gestao_cursos)
 require 'db.php';
 
-/**
- * Função de saída segura de um campo de um array associativo.
- */
 function passarDadosCurso(array $curso, string $campo) {
     if (isset($curso[$campo]) && $curso[$campo] !== '') {
         echo htmlspecialchars((string) $curso[$campo]);
@@ -13,14 +10,6 @@ function passarDadosCurso(array $curso, string $campo) {
     }
 }
 
-/* =========================================================
- *  Conexão com o banco de gestão de cursos (gestao_cursos)
- * ========================================================= */
-
-/**
- * Abre uma nova conexão PDO com o banco gestao_cursos.
- * Usada nas páginas que não precisam da conexão global $conn.
- */
 function getConexaoCursos() {
     $servername = "localhost";
     $username   = "root";
@@ -39,10 +28,6 @@ function getConexaoCursos() {
         die("Erro de conexão com o banco de cursos: " . $e->getMessage());
     }
 }
-
-/* =========================================================
- *  Listas de apoio (usadas em filtros e nos formulários)
- * ========================================================= */
 
 function fetchAreas($conn) {
     return $conn->query("SELECT id, nome FROM areas ORDER BY nome")
@@ -74,10 +59,6 @@ function fetchDiasSemana($conn) {
                 ->fetchAll(PDO::FETCH_ASSOC);
 }
 
-/**
- * Retorna os dias da semana de uma turma já formatados
- * como uma string separada por vírgulas (ex: "Segunda-feira, Quarta-feira").
- */
 function fetchDiasSemanaPorTurma($conn, $turmaId) {
     $sql = "SELECT ds.nome
             FROM turma_dias_semana tds
@@ -92,20 +73,6 @@ function fetchDiasSemanaPorTurma($conn, $turmaId) {
     return $dias ? implode(', ', $dias) : 'Não definido';
 }
 
-/* =========================================================
- *  Listagem de cursos/turmas (listaCursos.php)
- * ========================================================= */
-
-/**
- * Busca a lista de turmas/cursos para exibição em cards,
- * podendo ser filtrada por área, turno, status e nome (busca).
- *
- * $filtros aceita as chaves:
- *   'area_ids'   => array de ids de área
- *   'turno_ids'  => array de ids de turno
- *   'status_ids' => array de ids de status
- *   'busca'      => string para buscar no nome do curso
- */
 function fetchCursos($conn, array $filtros = []) {
     atualizarStatusCursosAutomatico($conn);
 
@@ -241,10 +208,6 @@ function avancarStatusCurso(PDO $conn, int $turmaId): ?int {
     return $novoStatus;
 }
 
-/**
- * Busca todas as informações de uma turma/curso específico
- * (usado na página cursoinfo.php).
- */
 function fetchCursoPorTurmaId($conn, $turmaId) {
     atualizarStatusCursosAutomatico($conn);
 
