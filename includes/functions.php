@@ -164,6 +164,10 @@ function calcularStatusCursoAutomatico(string $dataReferencia, string $dataInici
 function atualizarStatusCursosAutomatico(PDO $conn, ?string $dataReferencia = null): int {
     $dataReferencia = $dataReferencia ?? date('Y-m-d');
 
+    // Só AVANÇA o status automaticamente, nunca retrocede.
+    // Assim um avanço manual feito pelo botão "Atualizar status"
+    // não é desfeito quando a listagem recarrega.
+
     $sql = "SELECT id, data_inicio, data_termino, status_id FROM turmas WHERE status_id <> 5";
     $stmt = $conn->query($sql);
     $turmas = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -171,17 +175,27 @@ function atualizarStatusCursosAutomatico(PDO $conn, ?string $dataReferencia = nu
     $atualizados = 0;
 
     foreach ($turmas as $turma) {
-        $novoStatus = calcularStatusCursoAutomatico(
+        $statusAtual = (int) $turma['status_id'];
+
+        // Status manual (2 = Inscrições abertas manualmente) não é sobrescrito
+        if ($statusAtual === 2 || $statusAtual === 5) {
+            continue;
+        }
+
+        $statusAutomatico = calcularStatusCursoAutomatico(
             $dataReferencia,
             $turma['data_inicio'],
             $turma['data_termino']
         );
 
-        if ((int) $turma['status_id'] !== $novoStatus) {
-            $update = $conn->prepare("UPDATE turmas SET status_id = ? WHERE id = ?");
-            $update->execute([$novoStatus, $turma['id']]);
-            $atualizados++;
+        // Só aplica se o status automático estiver A FRENTE do atual
+        if ($statusAutomatico <= $statusAtual) {
+            continue;
         }
+
+        $update = $conn->prepare("UPDATE turmas SET status_id = ? WHERE id = ?");
+        $update->execute([$statusAutomatico, $turma['id']]);
+        $atualizados++;
     }
 
     return $atualizados;
