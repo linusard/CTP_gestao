@@ -38,22 +38,7 @@ body {
     background-color: #ffffff;
 }
 
-.leftbar {
-    width: 260px;
-    top: 80px;
-    height: calc(100vh - 96px);
-    position: fixed;
-    left: 16px;
-    background-color: #ffffff;
-    border-radius: 16px;
-    padding: 24px 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.3s ease;
-    z-index: 1000; 
-}
+/* Estilo do leftbar ficou em assets/css/leftbar.css */
 
 .main {
   margin-left: 300px; 
@@ -352,13 +337,6 @@ body {
 @media (max-width: 900px) {
     .principal {
         flex-direction: column;
-    }
-
-    .leftbar {
-        position: static;
-        width: auto;
-        height: auto;
-        margin: 16px;
     }
 
     .main {

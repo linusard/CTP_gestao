@@ -1,5 +1,5 @@
     <aside
-        class="sidebar"
+        class="leftbar-lista"
         aria-label="Meus cursos"
     >
 

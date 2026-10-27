@@ -1,0 +1,251 @@
+
+:root {
+    --preto: #0f172a;
+    --texto-suave: #64748b;
+    --texto-claro: #94a3b8;
+    --borda: #e5eaf1;
+
+    --azul: #1976c5;
+    --azul-hover: #125d9c;
+    --rosa: #ef3d73;
+    --rosa-hover: #d92c60;
+    --verde: #10b981;
+    --verde-hover: #059669;
+}
+
+/* ---------- Container ---------- */
+
+.leftbar {
+    position: fixed;
+    top: 90px;
+    left: 16px;
+    width: 268px;
+    height: calc(100vh - 106px);
+    padding: 30px 18px 24px;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fbfd 100%);
+    border: 1px solid var(--borda);
+    border-radius: 16px;
+}
+
+.leftbar::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    top: -120px;
+    left: -120px;
+    border-radius: 50%;
+    background: rgba(25, 118, 197, 0.045);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.leftbar>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Lista interna (evita conflito com .cursos da listagem) */
+
+.leftbar-lista {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------- Cabeçalho ---------- */
+
+.legenda {
+    padding: 0 5px;
+}
+
+.legenda h2 {
+    color: var(--preto);
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+}
+
+.legenda::after {
+    content: "Gerencie seus cursos";
+    display: block;
+    margin-top: 3px;
+    color: var(--texto-claro);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.leftbar hr {
+    width: 100%;
+    height: 1px;
+    margin: 20px 0 16px;
+    border: 0;
+    background: linear-gradient(90deg, #e2e8f0, rgba(226, 232, 240, 0));
+}
+
+/* ---------- Card de curso ---------- */
+
+.curso-mini {
+    position: relative;
+    margin-bottom: 12px;
+    padding: 16px 15px 14px 18px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e6ebf1;
+    border-left: 4px solid var(--azul);
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.035);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.curso-mini::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: -55px;
+    right: -50px;
+    border-radius: 50%;
+    background: rgba(25, 118, 197, 0.045);
+    transition: transform 0.35s ease;
+}
+
+.curso-mini::after {
+    content: "›";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #cbd5e1;
+    font-size: 23px;
+    font-weight: 300;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.curso-mini:hover {
+    transform: translateY(-3px);
+    border-color: #d5e0eb;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.09);
+}
+
+.curso-mini:hover::before {
+    transform: scale(1.45);
+}
+
+.curso-mini:hover::after {
+    right: 11px;
+    color: var(--azul);
+}
+
+.curso-mini.azul {
+    border-left-color: var(--azul);
+}
+
+.curso-mini.rosa {
+    border-left-color: var(--rosa);
+}
+
+.curso-mini.verde {
+    border-left-color: var(--verde);
+}
+
+.curso-mini h3 {
+    position: relative;
+    z-index: 1;
+    padding-right: 22px;
+    margin-bottom: 4px;
+    color: var(--preto);
+    font-size: 15px;
+    font-weight: 750;
+    letter-spacing: -0.15px;
+}
+
+/* Link "Ver curso" */
+
+.curso-mini a {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 12px;
+    color: var(--azul);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.curso-mini a::after {
+    content: "→";
+    font-size: 14px;
+    transition: transform 0.2s ease;
+}
+
+.curso-mini a:hover {
+    color: var(--azul-hover);
+}
+
+.curso-mini a:hover::after {
+    transform: translateX(3px);
+}
+
+.curso-mini.rosa a,
+.curso-mini.rosa a:hover {
+    color: var(--rosa);
+}
+
+.curso-mini.rosa a:hover::after {
+    color: var(--rosa-hover);
+}
+
+.curso-mini.verde a,
+.curso-mini.verde a:hover {
+    color: var(--verde);
+}
+
+.curso-mini.verde a:hover::after {
+    color: var(--verde-hover);
+}
+
+/* Rodapé do card (horário / inscrições) */
+
+.curso-mini div {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 10px;
+    margin-top: 2px;
+    border-top: 1px solid #edf1f5;
+    color: var(--texto-suave);
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.curso-mini div span:first-child {
+    color: var(--texto-claro);
+}
+
+.curso-mini div span:last-child {
+    color: #475569;
+    font-weight: 700;
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 900px) {
+    .leftbar {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 0 16px 16px;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+}
